@@ -1,4 +1,4 @@
-
+<hr>
 <div *ngIf="notices.length > 0; else noNotices">
   <ul>
     <li *ngFor="let notice of notices">
@@ -10,3 +10,4 @@
 <ng-template #noNotices>
   <p>No notices available.</p>
 </ng-template>
+<hr>
