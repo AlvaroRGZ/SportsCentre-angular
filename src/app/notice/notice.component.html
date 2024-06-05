@@ -1,1 +1,12 @@
-<p>notice works!</p>
+
+<div *ngIf="notices.length > 0; else noNotices">
+  <ul>
+    <li *ngFor="let notice of notices">
+      <h2>{{ notice.title }}</h2>
+      <p>{{ notice.body }}</p>
+    </li>
+  </ul>
+</div>
+<ng-template #noNotices>
+  <p>No notices available.</p>
+</ng-template>
