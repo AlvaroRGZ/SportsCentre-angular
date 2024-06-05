@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
-import {Auth, authState, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from '@angular/fire/auth';
-import { Observable } from 'rxjs';
-import firebase from 'firebase/compat/app';
+import {
+  Auth,
+  authState,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
+  User
+} from '@angular/fire/auth';
+import {firstValueFrom, Observable} from 'rxjs';
 import 'firebase/compat/auth';
 
 
@@ -12,8 +19,19 @@ export class FirebaseAuthService {
   constructor(private afAuth: Auth) { }
 
   // Register a new user with email and password
-  register(email: string, password: string): Promise<any> {  // Cambiar por UserCredential
-    return createUserWithEmailAndPassword(this.afAuth, email, password);
+  register(email: string, password: string, role: string): Promise<any> {  // Cambiar por UserCredential
+    return createUserWithEmailAndPassword(this.afAuth, email, password).then(() => {
+      this.login(email, password).then(() => {
+        this.getCurrentUser().subscribe((user: User | null) => {
+          if (user) {
+            updateProfile(user, { displayName: role })
+          } else {
+            // Firebase error
+            console.log("No se recupero el usuario");
+          }
+        });
+      })
+    });
   }
 
   // Login with email and password
@@ -27,19 +45,13 @@ export class FirebaseAuthService {
   }
 
   // Get the currently authenticated user
-  getCurrentUser(): Observable<any | null> {
+  getCurrentUser(): Observable<User | null> {
     return authState(this.afAuth);
   }
 
   // Reset password for the specified email
   //resetPassword(email: string): Promise<void> {
   //  return this.afAuth.sendPasswordResetEmail(email);
-  //}
-
-
-
-  //updateDisplayName(displayName: string): Promise<void> {
-  //  return this.currentUser.then(user => user?.updateProfile({ displayName }));
   //}
 
   // Update the user's password
