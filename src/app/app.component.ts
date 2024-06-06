@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {FirebaseAuthService} from "./authentication/firebase-auth.service";
 import {NgIf} from "@angular/common";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgIf],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgIf, MatIcon],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -33,6 +34,7 @@ export class AppComponent implements OnInit {
             //this.router.navigate(['/home']);
             break;
         }
+        this.isLoggedIn = true;
       } else {
         //this.router.navigate(['/notices']);
         this.userRole = 'user';
@@ -48,6 +50,8 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
-
+    this.authService.logout().then(() => {
+      this.isLoggedIn = false;
+    });
   }
 }
