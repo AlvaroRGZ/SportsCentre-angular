@@ -4,6 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { FirebaseAuthService } from "../authentication/firebase-auth.service";
 import {UserAccount} from "../signup/userAccount.model";
 import { UserCredential } from '@firebase/auth-types';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ import { UserCredential } from '@firebase/auth-types';
 export class LoginComponent {
 
   protected userAccount: UserAccount = { } as UserAccount;
-  constructor(private authService: FirebaseAuthService) { }
+  constructor(private authService: FirebaseAuthService,
+              private router: Router) { }
 
   onSubmit() {
     this.authService.login(this.userAccount.email, this.userAccount.password).then((user: UserCredential) => {
@@ -27,7 +29,7 @@ export class LoginComponent {
         text: 'Has iniciado sesión correctamente. Eres' + user.user?.displayName,
         confirmButtonText: 'OK'
       }).then((result) => {
-        // Handle the OK button click if needed
+        this.router.navigate(['/notices'])
       });
     }).catch((error) => {
       Swal.fire({
