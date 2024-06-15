@@ -24,6 +24,8 @@ export class InstallationService {
   }
 
   updateInstallation(installation: Installation): Observable<Installation> {
+    console.log("MANDO");
+    console.log(installation);
     return this.http.put<Installation>(`${this.apiUrl}/${installation.id}`, installation);
   }
 

@@ -38,7 +38,10 @@ export class AdminInstallationsComponent implements OnInit {
   openCreateDialog(): void {
     const dialogRef = this.dialog.open(CreateInstallationDialogComponent, {
       width: '400px',
-      data: { installation: { name: '', description: '', capacity: null, rentalPrice: null }, isUpdate: true }
+      data: {
+        installation: { name: '', description: '', capacity: null, rentalPrice: null },
+        isUpdate: true,
+        title: "Create installation"}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -57,7 +60,7 @@ export class AdminInstallationsComponent implements OnInit {
   openUpdateDialog(installation: Installation): void {
     const dialogRef = this.dialog.open(CreateInstallationDialogComponent, {
       width: '400px',
-      data: { installation: installation, isUpdate: true }
+      data: { installation: installation, isUpdate: true, title: "Update installation"}
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -28,12 +28,14 @@ import {BooleanInput} from "@angular/cdk/coercion";
 export class CreateInstallationDialogComponent {
   isUpdate: BooleanInput = false;
   protected installation: Installation;
+  protected title: string;
   constructor(
     public dialogRef: MatDialogRef<CreateInstallationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {installation: Installation, isUpdate: boolean }
+    @Inject(MAT_DIALOG_DATA) public data: {installation: Installation, isUpdate: boolean, title: string}
   ) {
     this.installation = data.installation;
     this.isUpdate = data.isUpdate || false;
+    this.title = data.title || 'Update Installation';
   }
 
   closeDialog(): void {
@@ -41,6 +43,6 @@ export class CreateInstallationDialogComponent {
   }
 
   save(): void {
-    this.dialogRef.close(this.data);
+    this.dialogRef.close(this.installation);
   }
 }
