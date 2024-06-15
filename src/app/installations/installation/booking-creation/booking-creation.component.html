@@ -1,0 +1,23 @@
+<div class="col-md-6">
+  <label>
+    <input type="checkbox" [(ngModel)]="needMaterials" (change)="toggleNeedMaterials()"> I need materials
+  </label>
+
+  <div *ngIf="needMaterials">
+    <select (change)="addMaterial($event)">
+      <option *ngFor="let material of materials" [value]="material.name">
+        {{ material.name }}
+      </option>
+    </select>
+
+    <div>
+      <h4>Selected materials</h4>
+      <ul>
+        <li *ngFor="let material of selectedMaterials">{{ material }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <button (click)="updateBooking()" style="background-color: green; color: white;">Update booking</button>
+  <button (click)="cancelBooking()" style="background-color: red; color: white;">Cancel Booking</button>
+</div>

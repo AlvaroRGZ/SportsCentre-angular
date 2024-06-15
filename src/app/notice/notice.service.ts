@@ -14,6 +14,5 @@ export class NoticeService {
 
   getNotices(): Observable<Notice[]> {
     return this.http.get<Notice[]>(this.baseUrl);
-    //return of(this.notices); // For testing purposes
   }
 }

@@ -10,27 +10,35 @@ import {
 } from '@angular/fire/auth';
 import {firstValueFrom, Observable} from 'rxjs';
 import 'firebase/compat/auth';
+import {HttpClient} from "@angular/common/http";
+import {UserAccount} from "../signup/userAccount.model";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseAuthService {
-  constructor(private afAuth: Auth) { }
+
+  private static BASE_URL: string = 'http://localhost:8080/users';
+  constructor(private afAuth: Auth, private http: HttpClient) { }
 
   // Register a new user with email and password
   register(email: string, password: string, role: string): Promise<any> {  // Cambiar por UserCredential
-    return createUserWithEmailAndPassword(this.afAuth, email, password).then(() => {
-      this.login(email, password).then(() => {
-        this.getCurrentUser().subscribe((user: User | null) => {
-          if (user) {
-            updateProfile(user, { displayName: role })
-          } else {
-            // Firebase error
-            console.log("No se recupero el usuario");
-          }
-        });
-      })
+    return createUserWithEmailAndPassword(this.afAuth, email, password)
+      .then(() => {
+        this.login(email, password).then(() => {
+          this.getCurrentUser().subscribe((user: User | null) => {
+            this.registerNewUserAsA(email, password, role).subscribe((user) => {});
+            if (user) {
+              updateProfile(user, { displayName: role })
+            } else {
+              console.log("Error while updating user role");
+            }
+          });
+        })
+    })
+    .catch(error => {
+      console.log("Error while registering new user: " + error)
     });
   }
 
@@ -47,6 +55,12 @@ export class FirebaseAuthService {
   // Get the currently authenticated user
   getCurrentUser(): Observable<User | null> {
     return authState(this.afAuth);
+  }
+
+  registerNewUserAsA(email: string, password: string, role: string): Observable<User> {
+    const user: UserAccount= {role: role, email: email, password: password, confirmPassword: password};
+    console.log("HAGO LA LLAMADA A LA API");
+    return this.http.post<User>(FirebaseAuthService.BASE_URL, user);
   }
 
   // Reset password for the specified email

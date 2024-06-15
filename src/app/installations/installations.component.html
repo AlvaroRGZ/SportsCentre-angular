@@ -1,1 +1,15 @@
-<p>installations works!</p>
+<div class="container">
+  <div class="row">
+    <div *ngFor="let installation of installations; let i = index" class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">{{ installation.name }}</h5>
+          <p class="card-text">{{ installation.description }}</p>
+          <p class="card-text"><strong>Capacity:</strong> {{ installation.capacity }}</p>
+          <p class="card-text"><strong>Rental Price:</strong> ${{ installation.rentalPrice }}</p>
+          <button class="btn btn-primary" [routerLink]="['/installations', installation.id]">View Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

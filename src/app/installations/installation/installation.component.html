@@ -1,0 +1,19 @@
+<div *ngIf="installation">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>{{ installation.name }}</h2>
+      <p>{{ installation.description }}</p>
+      <p><strong>Capacity:</strong> {{ installation.capacity }}</p>
+      <p><strong>Rental Price:</strong> ${{ installation.rentalPrice }}</p>
+      <app-reservation-table [installation]="installation"></app-reservation-table>
+    </div>
+    <div *ngIf="!showBookingForm">
+      <button (click)="toggleBookingForm()" style="background-color: blue; color: white;">Book Now</button>
+    </div>
+    <div class="col-md-6">
+      <div *ngIf="showBookingForm">
+        <app-booking-creation (cancelBookingEvent)="handleCancelBooking()"></app-booking-creation>
+      </div>
+    </div>
+  </div>
+</div>
