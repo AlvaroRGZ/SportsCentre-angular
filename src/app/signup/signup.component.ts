@@ -3,13 +3,15 @@ import {FormsModule} from "@angular/forms";
 import {UserAccount} from "./userAccount.model";
 import {FirebaseAuthService} from "../authentication/firebase-auth.service";
 import Swal from 'sweetalert2';
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [
-    FormsModule
-  ],
+    imports: [
+        FormsModule,
+        RouterLink
+    ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })

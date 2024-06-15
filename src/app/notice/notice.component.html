@@ -2,8 +2,9 @@
 <div *ngIf="notices.length > 0; else noNotices">
   <ul>
     <li *ngFor="let notice of notices">
-      <h2>{{ notice.title }}</h2>
-      <p>{{ notice.body }}</p>
+      <h4>{{ notice.title }}</h4>
+      <h4>{{ notice.id }}</h4>
+      <h5>{{ notice.body }}</h5>
     </li>
   </ul>
 </div>

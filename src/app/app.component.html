@@ -1,8 +1,11 @@
-<h1>Angular Router App</h1>
-<nav>
-  <ul>
-    <li><a routerLink="/notices" routerLinkActive="active" ariaCurrentWhenActive="page">Componente de noticias</a></li>
-  </ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">SportCentre</a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <a class="nav-link" routerLink="/login" *ngIf="!isLoggedIn">Login</a>
+    <a class="nav-link" routerLink="/notices" *ngIf="isLoggedIn">
+      <span class="material-icons">account_circle</span>
+    </a>
+    <a class="nav-link" routerLink="/" *ngIf="isLoggedIn" (click)="logout()">Logout</a>
+  </div>
 </nav>
-<!-- The routed views render in the <router-outlet>-->
 <router-outlet></router-outlet>
