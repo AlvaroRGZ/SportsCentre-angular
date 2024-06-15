@@ -32,4 +32,8 @@ export class InstallationService {
   deleteInstallation(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  isInstallationNameAvailable(name: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/check-name?name=${name}`);
+  }
 }

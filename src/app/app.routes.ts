@@ -8,6 +8,7 @@ import {InstallationComponent} from "./installations/installation/installation.c
 import {AdministrationComponent} from "./administration/administration.component";
 import {AdminInstallationsComponent} from "./administration/admin-installations/admin-installations.component";
 import {AdminOptionsComponent} from "./administration/admin-options/admin-options.component";
+import {AdminMaterialsComponent} from "./administration/admin-materials/admin-materials.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,7 +20,8 @@ export const routes: Routes = [
   { path: 'administration', component: AdministrationComponent,
     children: [
       {path: '', component: AdminOptionsComponent},
-      {path: 'installations', component: AdminInstallationsComponent}
+      {path: 'installations', component: AdminInstallationsComponent},
+      {path: 'materials', component: AdminMaterialsComponent}
     ]
   },
   { path: 'home', component: HomeComponent }
