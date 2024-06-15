@@ -64,4 +64,16 @@ export class ReservationTableComponent {
       alert('Please select a day and time');
     }
   }
+
+  getReservationDate(): Date {
+    if (this.selectedDay && this.selectedHour) {
+      const date = new Date(this.selectedDay);
+      const [hours, minutes] = this.selectedHour.split(':').map(Number);
+      date.setHours(hours);
+      date.setMinutes(minutes);
+      return date;
+    } else {
+      return new Date()
+    }
+  }
 }

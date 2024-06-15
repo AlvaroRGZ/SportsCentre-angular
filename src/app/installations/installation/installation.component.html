@@ -12,7 +12,7 @@
     </div>
     <div class="col-md-6">
       <div *ngIf="showBookingForm">
-        <app-booking-creation (cancelBookingEvent)="handleCancelBooking()"></app-booking-creation>
+        <app-booking-creation (cancelBookingEvent)="handleCancelBooking()" (confirmBookingEvent)="handleConfirmBooking()"></app-booking-creation>
       </div>
     </div>
   </div>

@@ -1,10 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {NgIf} from "@angular/common";
-import {Installation} from "../installation.model";
-import {ActivatedRoute} from "@angular/router";
-import {InstallationService} from "../installation.service";
-import {ReservationTableComponent} from "./reservation-table/reservation-table.component";
-import {BookingCreationComponent} from "./booking-creation/booking-creation.component";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { Installation } from '../installation.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { InstallationService } from '../installation.service';
+import { ReservationTableComponent } from './reservation-table/reservation-table.component';
+import { BookingCreationComponent } from './booking-creation/booking-creation.component';
+import { Booking } from './booking-creation/bookingServices/booking.model';
+import { FirebaseAuthService } from '../../authentication/firebase-auth.service';
+import { BookingsService } from './booking-creation/bookingServices/bookings.service';
 
 @Component({
   selector: 'app-installation',
@@ -15,25 +18,48 @@ import {BookingCreationComponent} from "./booking-creation/booking-creation.comp
     BookingCreationComponent
   ],
   templateUrl: './installation.component.html',
-  styleUrl: './installation.component.css'
+  styleUrls: ['./installation.component.css']
 })
 export class InstallationComponent implements OnInit {
-  installation: Installation | undefined;
+  @ViewChild(BookingCreationComponent) bookingCreation!: BookingCreationComponent;
+  @ViewChild(ReservationTableComponent) reservationTable!: ReservationTableComponent;
+  installation: Installation = {} as Installation;
+  protected userEmail: string = '';
   protected showBookingForm: boolean = false;
   protected actionTitle: string[] = ['Book now', 'Cancel'];
 
+  booking: Booking = {} as Booking;
+
   constructor(
     private route: ActivatedRoute,
-    private installationService: InstallationService
+    private router: Router,
+    private installationService: InstallationService,
+    private authService: FirebaseAuthService,
+    private bookingsService: BookingsService
   ) { }
 
   ngOnInit(): void {
+    // Initialize the booking object
+    this.booking = {
+      datetime: new Date(),
+      registrationTime: new Date(),
+      booker: this.userEmail,
+      installation: '',
+      materials: []
+    };
+
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.installationService.getInstallationById(id).subscribe((data: Installation) => {
         this.installation = data;
+        // Update booking installation ID after fetching installation details
+        this.booking.installation = this.installation.id;
       });
     }
+    this.authService.getCurrentUser().subscribe((user) => {
+      this.booking.booker = user?.email || 'test@gmail.com';
+      console.log(this.booking.booker);
+    });
   }
 
   toggleBookingForm(): void {
@@ -50,5 +76,23 @@ export class InstallationComponent implements OnInit {
 
   handleCancelBooking(): void {
     this.showBookingForm = false;
+  }
+
+  handleConfirmBooking(): void {
+    if (this.bookingCreation && this.reservationTable) {
+      this.booking.materials = this.bookingCreation.selectedMaterials.map(material => material.id);
+      this.booking.datetime = this.reservationTable.getReservationDate();
+      console.log("ESTO ES LO QUE MANDO");
+      console.log(this.booking);
+      this.bookingsService.createBooking(this.booking).subscribe(
+        response => {
+          console.log('Booking created successfully', response);
+          this.router.navigate(['home']);
+        },
+        error => {
+          console.error('Error creating booking', error);
+        }
+      );
+    }
   }
 }
