@@ -18,4 +18,16 @@ export class InstallationService {
   getInstallationById(id: string): Observable<Installation> {
     return this.http.get<Installation>(`${this.apiUrl}/${id}`);
   }
+
+  createInstallation(installation: Installation): Observable<Installation> {
+    return this.http.post<Installation>(this.apiUrl, installation);
+  }
+
+  updateInstallation(installation: Installation): Observable<Installation> {
+    return this.http.put<Installation>(`${this.apiUrl}/${installation.id}`, installation);
+  }
+
+  deleteInstallation(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

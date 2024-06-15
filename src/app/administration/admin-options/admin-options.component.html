@@ -1,28 +1,22 @@
 <div class="container">
   <div class="row mt-3">
-    <div class="col-md-4">
-      <app-notice></app-notice>
-    </div>
     <div class="col-md-8">
       <div class="row">
         <div class="col-md-6">
           <button routerLink="installations" class="btn btn-info">Installations</button>
         </div>
         <div class="col-md-6">
-          <button (click)="logout()" class="btn btn-success">Sport Classes</button>
+          <button routerLink="materials" class="btn btn-success">Materials</button>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col-md-6">
-          <button (click)="logout()" class="btn btn-warn">Logout</button>
+          <button routerLink="bookings" class="btn btn-warn">Bookings</button>
         </div>
         <div class="col-md-6">
-          <button (click)="logout()" class="btn btn-danger">Logout</button>
+          <button routerLink="complaints" class="btn btn-danger">Complaints</button>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-3">
-    <button routerLink="/administration" class="btn btn-warn">Administrator mode</button>
   </div>
 </div>
