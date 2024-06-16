@@ -29,6 +29,7 @@ export class InstallationComponent implements OnInit {
   protected actionTitle: string[] = ['Book now', 'Cancel'];
 
   booking: Booking = {} as Booking;
+  installationAction: string = 'Log in to book a session';
 
   constructor(
     private route: ActivatedRoute,
@@ -57,8 +58,12 @@ export class InstallationComponent implements OnInit {
         this.booking.installation = this.installation.id;
       });
     }
+
     this.authService.getCurrentUser().subscribe((user) => {
-      this.booking.booker = user?.email || 'test@gmail.com';
+      if (user) {
+        this.booking.booker = user.email || 'NotRegisteredUser';
+        this.installationAction = 'Book now';
+      }
       console.log(this.booking.booker);
     });
   }

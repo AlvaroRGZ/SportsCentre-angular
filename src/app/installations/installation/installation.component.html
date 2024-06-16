@@ -8,7 +8,7 @@
       <app-reservation-table [installation]="installation"></app-reservation-table>
     </div>
     <div *ngIf="!showBookingForm">
-      <button (click)="toggleBookingForm()" style="background-color: blue; color: white;">Book Now</button>
+      <button (click)="toggleBookingForm()" style="background-color: blue; color: white;">{{this.installationAction}}</button>
     </div>
     <div class="col-md-6">
       <div *ngIf="showBookingForm">

@@ -21,6 +21,9 @@ import {NgIf} from "@angular/common";
 export class LoginComponent {
 
   protected userAccount: UserAccount = { } as UserAccount;
+  private isAdmin: boolean = false;
+  private userRole: string = 'user';
+  private isLoggedIn: boolean = false;
   constructor(private authService: FirebaseAuthService,
               private router: Router) { }
 
@@ -32,7 +35,7 @@ export class LoginComponent {
         text: 'Has iniciado sesión correctamente. Eres' + user.user?.displayName,
         confirmButtonText: 'OK'
       }).then((result) => {
-        this.router.navigate(['/notices'])
+        this.authService.navigateHomeGivenUserRole();
       });
     }).catch((error) => {
       Swal.fire({
@@ -42,6 +45,25 @@ export class LoginComponent {
         confirmButtonText: 'OK'
       });
       console.error('Error logging in:', error);
+    });
+  }
+
+  navigateHome(): void {
+    this.authService.getCurrentRole().subscribe((role) => {
+      switch (role) {
+        case 'admin':
+          this.router.navigate(['/administration']);
+          break;
+        case 'teacher':
+          this.router.navigate(['/clients']);
+          break;
+        case 'client':
+          this.router.navigate(['/clients']);
+          break;
+        default:
+          this.router.navigate(['/home']);
+          break;
+      }
     });
   }
 }
