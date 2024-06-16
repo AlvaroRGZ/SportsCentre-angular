@@ -41,6 +41,7 @@ export class InstallationComponent implements OnInit {
   ngOnInit(): void {
     // Initialize the booking object
     this.booking = {
+      id: '',
       datetime: new Date(),
       registrationTime: new Date(),
       booker: this.userEmail,

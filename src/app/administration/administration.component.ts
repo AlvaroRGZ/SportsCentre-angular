@@ -15,9 +15,5 @@ import {RouterLink, RouterOutlet} from "@angular/router";
 })
 export class AdministrationComponent implements OnInit {
   ngOnInit(): void {
-    console.log("HAGO ADMIN")
-  }
-  navigate(): void {
-
   }
 }

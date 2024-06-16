@@ -9,6 +9,10 @@ import {AdministrationComponent} from "./administration/administration.component
 import {AdminInstallationsComponent} from "./administration/admin-installations/admin-installations.component";
 import {AdminOptionsComponent} from "./administration/admin-options/admin-options.component";
 import {AdminMaterialsComponent} from "./administration/admin-materials/admin-materials.component";
+import {AdminBookingsComponent} from "./administration/admin-bookings/admin-bookings.component";
+import {ClientsComponent} from "./clients/clients.component";
+import {ComplaintsComponent} from "./clients/complaints/complaints.component";
+import {ClientOptionsComponent} from "./clients/client-options/client-options.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,8 +25,14 @@ export const routes: Routes = [
     children: [
       {path: '', component: AdminOptionsComponent},
       {path: 'installations', component: AdminInstallationsComponent},
-      {path: 'materials', component: AdminMaterialsComponent}
+      {path: 'materials', component: AdminMaterialsComponent},
+      {path: 'bookings', component: AdminBookingsComponent}
     ]
   },
-  { path: 'home', component: HomeComponent }
+  { path: 'home', component: HomeComponent },
+  { path: 'clients', component: ClientsComponent,
+    children: [
+      {path: '', component: ClientOptionsComponent},
+      {path: 'complaints', component: ComplaintsComponent}
+    ] }
 ];
