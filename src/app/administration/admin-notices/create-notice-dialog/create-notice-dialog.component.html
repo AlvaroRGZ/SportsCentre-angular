@@ -1,0 +1,16 @@
+<!-- create-notice-dialog.component.html -->
+<h1 mat-dialog-title>{{ title }}</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="notice.title">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Body</mat-label>
+    <textarea matInput [(ngModel)]="notice.body"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Cancel</button>
+  <button mat-button [disabled]="!isFormValid()" (click)="save()">Save</button>
+</div>
