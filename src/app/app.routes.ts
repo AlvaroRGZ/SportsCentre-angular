@@ -13,6 +13,7 @@ import {AdminBookingsComponent} from "./administration/admin-bookings/admin-book
 import {ClientsComponent} from "./clients/clients.component";
 import {ComplaintsComponent} from "./clients/complaints/complaints.component";
 import {ClientOptionsComponent} from "./clients/client-options/client-options.component";
+import {AdminComplaintsComponent} from "./administration/admin-complaints/admin-complaints.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,6 +27,7 @@ export const routes: Routes = [
       {path: '', component: AdminOptionsComponent},
       {path: 'installations', component: AdminInstallationsComponent},
       {path: 'materials', component: AdminMaterialsComponent},
+      {path: 'complaints', component: AdminComplaintsComponent},
       {path: 'bookings', component: AdminBookingsComponent}
     ]
   },

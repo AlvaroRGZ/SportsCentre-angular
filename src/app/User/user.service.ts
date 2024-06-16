@@ -14,6 +14,14 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.apiUrl);
+  }
+
+  getUsersWhoHaveComplaints(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/complaints`);
+  }
+
   getUserComplaints(email: string): Observable<Complaint[]> {
     return this.http.get<Complaint[]>(`${this.apiUrl}/${email}/complaints`);
   }

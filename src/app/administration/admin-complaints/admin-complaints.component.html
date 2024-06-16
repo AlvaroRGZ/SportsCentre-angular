@@ -1,0 +1,41 @@
+<div *ngFor="let user of users">
+  <h3>{{ user.name }}</h3>
+  <table mat-table [dataSource]="complaintsByUser[user.id]" class="mat-elevation-z8">
+
+    <!-- Title Column -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef> Title </th>
+      <td mat-cell *matCellDef="let complaint"> {{complaint.title}} </td>
+    </ng-container>
+
+    <!-- Body Column -->
+    <ng-container matColumnDef="body">
+      <th mat-header-cell *matHeaderCellDef> Body </th>
+      <td mat-cell *matCellDef="let complaint"> {{complaint.body}} </td>
+    </ng-container>
+
+    <!-- Datetime Column -->
+    <ng-container matColumnDef="datetime">
+      <th mat-header-cell *matHeaderCellDef> Date and Time </th>
+      <td mat-cell *matCellDef="let complaint"> {{complaint.datetime | date:'short'}} </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let complaint">
+        <button mat-icon-button color="primary" (click)="editComplaint(complaint)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteComplaint(user.email, complaint.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Header and Row Declarations -->
+    <tr mat-header-row *matHeaderRowDef="['title', 'body', 'datetime', 'actions']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['title', 'body', 'datetime', 'actions'];"></tr>
+
+  </table>
+</div>
