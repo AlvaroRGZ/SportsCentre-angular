@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
 
   constructor(private authService: FirebaseAuthService, private router: Router) {
     this.authService.getCurrentUser().subscribe((user) => {
+      console.log()
       if (user) {
         switch (user.displayName) {
           case 'admin':

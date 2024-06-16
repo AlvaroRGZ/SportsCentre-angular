@@ -1,14 +1,15 @@
-<h2>Complaint List</h2>
+<button mat-raised-button color="primary" (click)="openCreateDialog()">Make a complaint</button>
 
-<button mat-raised-button color="primary" (click)="openCreateDialog()">Add New Complaint</button>
-
-<div *ngFor="let complaint of complaints">
-  <h3>{{ complaint.title }}</h3>
-  <p>{{ complaint.body }}</p>
-  <small>{{ complaint.datetime | date: 'short' }}</small>
-  <div>
-    <button mat-icon-button color="warn" (click)="deleteComplaint(complaint.id)">
-      <mat-icon>delete</mat-icon>
-    </button>
-  </div>
+<div *ngIf="complaints.length > 0; else noComplaints">
+    <div *ngFor="let complaint of complaints">
+        <h3>{{ complaint.title }}</h3>
+        <p>{{ complaint.body }}</p>
+        <button mat-icon-button (click)="deleteComplaint(complaint.id)">
+            <mat-icon>delete</mat-icon>
+        </button>
+        <p>{{ complaint.datetime | date: 'short' }}</p>
+    </div>
 </div>
+<ng-template #noComplaints>
+    <p>No complaints found.</p>
+</ng-template>
