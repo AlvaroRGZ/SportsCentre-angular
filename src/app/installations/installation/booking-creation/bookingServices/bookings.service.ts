@@ -20,7 +20,15 @@ export class BookingsService {
     return this.http.get<Booking>(`${this.baseUrl}/${id}`);
   }
 
+  getBookingsByInstallation(installationId: string): Observable<Booking[]> {
+    return this.http.get<Booking[]>(`${this.baseUrl}/installation/${installationId}`);
+  }
+
   createBooking(booking: Booking): Observable<Booking> {
     return this.http.post<Booking>(this.baseUrl, booking);
+  }
+
+  deleteBooking(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }

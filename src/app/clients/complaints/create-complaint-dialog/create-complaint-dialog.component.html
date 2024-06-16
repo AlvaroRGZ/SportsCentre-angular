@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="complaint.title">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Body</mat-label>
+    <textarea matInput [(ngModel)]="complaint.body"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Cancel</button>
+  <button mat-button (click)="save()">Save</button>
+</div>

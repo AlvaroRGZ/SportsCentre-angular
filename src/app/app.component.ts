@@ -13,45 +13,58 @@ import {MatIcon} from "@angular/material/icon";
 })
 export class AppComponent implements OnInit {
   title = 'SportCentre-angular';
-  isLoggedIn: Boolean = false;
+  isLoggedIn: boolean = false;
   isAdmin: boolean = false;
   userRole: string = 'user';
-  constructor(private authService: FirebaseAuthService,
-              private router: Router) {
+
+  constructor(private authService: FirebaseAuthService, private router: Router) {
     this.authService.getCurrentUser().subscribe((user) => {
       if (user) {
         switch (user.displayName) {
-          case 'Administrador':
+          case 'admin':
             this.isAdmin = true;
+            this.userRole = 'admin';
             break;
-          case 'Profesor':
+          case 'teacher':
             this.isAdmin = true;
+            this.userRole = 'teacher';
             break;
-          case 'Cliente':
-            //this.router.navigate(['/signup']);
+          case 'client':
+            this.userRole = 'client';
             break;
           default:
-            //this.router.navigate(['/home']);
+            this.userRole = 'user';
             break;
         }
         this.isLoggedIn = true;
       } else {
-        //this.router.navigate(['/notices']);
         this.userRole = 'user';
       }
     });
   }
-  ngOnInit () {
 
+  ngOnInit(): void {}
+
+  login(): void {
+    // Implement login logic
   }
 
-  login() {
-
-  }
-
-  logout() {
+  logout(): void {
     this.authService.logout().then(() => {
       this.isLoggedIn = false;
+      this.router.navigate(['/home']);
     });
+  }
+
+  navigateHome(): void {
+    if (this.isLoggedIn) {
+      if (this.userRole === 'admin') {
+        this.router.navigate(['/administration']);
+      } else if (this.userRole === 'client') {
+        this.router.navigate(['/clients']);
+      }
+    } else {
+      this.router.navigate(['/home']);
+    }
   }
 }

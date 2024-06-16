@@ -63,6 +63,11 @@ export class FirebaseAuthService {
     return this.http.post<User>(FirebaseAuthService.BASE_URL, user);
   }
 
+  checkEmailExists(email: string) {
+    console.log("Pregunto si existe" + email)
+    return this.http.get<boolean>(`${FirebaseAuthService.BASE_URL}/existsByEmail?email=${email}`);
+  }
+
   // Reset password for the specified email
   //resetPassword(email: string): Promise<void> {
   //  return this.afAuth.sendPasswordResetEmail(email);
