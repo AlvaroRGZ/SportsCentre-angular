@@ -16,11 +16,13 @@ export class AppComponent implements OnInit {
   isLoggedIn: boolean = false;
   isAdmin: boolean = false;
   userRole: string = 'user';
+  userName: string = '';
 
   constructor(private authService: FirebaseAuthService, private router: Router) {
     this.authService.getCurrentUser().subscribe((user) => {
       console.log()
       if (user) {
+        this.userName = user.email!;
         switch (user.displayName) {
           case 'admin':
             this.isAdmin = true;
@@ -53,6 +55,7 @@ export class AppComponent implements OnInit {
   logout(): void {
     this.authService.logout().then(() => {
       this.isLoggedIn = false;
+      this.userName = '';
       this.router.navigate(['/home']);
     });
   }

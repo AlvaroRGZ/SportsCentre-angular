@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {UserAccount} from "./userAccount.model";
 import {FirebaseAuthService} from "../authentication/firebase-auth.service";
 import Swal from 'sweetalert2';
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {NgClass, NgIf} from "@angular/common";
 
 @Component({
@@ -23,7 +23,7 @@ export class SignupComponent {
   signupForm: FormGroup;
   emailExists: boolean = false;
 
-  constructor(private fb: FormBuilder, private authService: FirebaseAuthService) {
+  constructor(private fb: FormBuilder, private authService: FirebaseAuthService, private router: Router) {
     this.signupForm = this.fb.group({
       role: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -62,6 +62,8 @@ export class SignupComponent {
         title: '¡Registro exitoso!',
         text: 'Tu cuenta ha sido registrada correctamente.',
         confirmButtonText: 'OK'
+      }).then(() => {
+        this.router.navigate(['/login']) // Navigate to the login page after success alert
       });
     }).catch((error) => {
       console.error('Error registering user:', error);

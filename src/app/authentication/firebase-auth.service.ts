@@ -8,10 +8,11 @@ import {
   updateProfile,
   User
 } from '@angular/fire/auth';
-import {firstValueFrom, Observable} from 'rxjs';
+import {firstValueFrom, Observable, of, switchMap} from 'rxjs';
 import 'firebase/compat/auth';
 import {HttpClient} from "@angular/common/http";
 import {UserAccount} from "../signup/userAccount.model";
+import {Router} from "@angular/router";
 
 
 @Injectable({
@@ -20,7 +21,7 @@ import {UserAccount} from "../signup/userAccount.model";
 export class FirebaseAuthService {
 
   private static BASE_URL: string = 'http://localhost:8080/users';
-  constructor(private afAuth: Auth, private http: HttpClient) { }
+  constructor(private afAuth: Auth, private http: HttpClient, private router: Router) { }
 
   // Register a new user with email and password
   register(email: string, password: string, role: string): Promise<any> {  // Cambiar por UserCredential
@@ -52,9 +53,20 @@ export class FirebaseAuthService {
     return signOut(this.afAuth);
   }
 
-  // Get the currently authenticated user
   getCurrentUser(): Observable<User | null> {
     return authState(this.afAuth);
+  }
+
+  getCurrentRole(): Observable<string> {
+    return this.getCurrentUser().pipe(
+      switchMap(user => {
+        if (user && user.displayName) {
+          return of(user.displayName);
+        } else {
+          return of('user');
+        }
+      })
+    );
   }
 
   registerNewUserAsA(email: string, password: string, role: string): Observable<User> {
@@ -66,6 +78,25 @@ export class FirebaseAuthService {
   checkEmailExists(email: string) {
     console.log("Pregunto si existe" + email)
     return this.http.get<boolean>(`${FirebaseAuthService.BASE_URL}/existsByEmail?email=${email}`);
+  }
+
+  navigateHomeGivenUserRole() {
+    this.getCurrentRole().subscribe((role) => {
+      switch (role) {
+        case 'admin':
+          this.router.navigate(['/administration']);
+          break;
+        case 'teacher':
+          this.router.navigate(['/clients']);
+          break;
+        case 'client':
+          this.router.navigate(['/clients']);
+          break;
+        default:
+          this.router.navigate(['/home']);
+          break;
+      }
+    });
   }
 
   // Reset password for the specified email

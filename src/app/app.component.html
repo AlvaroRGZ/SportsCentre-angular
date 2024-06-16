@@ -2,6 +2,7 @@
   <a class="navbar-brand" (click)="navigateHome()">SportCentre</a>
   <div class="collapse navbar-collapse" id="navbarNav">
     <a class="nav-link" routerLink="/login" *ngIf="!isLoggedIn">Login</a>
+    <a>{{this.userName}}</a>
     <a class="nav-link" routerLink="/notices" *ngIf="isLoggedIn">
       <span class="material-icons">account_circle</span>
     </a>
