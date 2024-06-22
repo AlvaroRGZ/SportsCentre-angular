@@ -24,6 +24,10 @@ export class BookingsService {
     return this.http.get<Booking[]>(`${this.baseUrl}/installation/${installationId}`);
   }
 
+  getBookingsByBookerEmail(email: string): Observable<Booking[]> {
+    return this.http.get<Booking[]>(`${this.baseUrl}/booker/${email}`);
+  }
+
   createBooking(booking: Booking): Observable<Booking> {
     return this.http.post<Booking>(this.baseUrl, booking);
   }

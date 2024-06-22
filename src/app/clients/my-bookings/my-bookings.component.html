@@ -1,0 +1,43 @@
+<div *ngFor="let installation of installations">
+  <div *ngIf="bookingsByInstallation[installation.id] && bookingsByInstallation[installation.id].length > 0">
+    <h3>{{ installation.name }}</h3>
+    <table mat-table [dataSource]="bookingsByInstallation[installation.id]" class="mat-elevation-z8">
+
+      <!-- Date Column -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let booking"> {{ booking.datetime | date:'MMM d, y, h:mm a' }} </td>
+      </ng-container>
+
+      <!-- Materials Column -->
+      <ng-container matColumnDef="materials">
+        <th mat-header-cell *matHeaderCellDef> Materials </th>
+        <td mat-cell *matCellDef="let booking">
+          <ul>
+            <li *ngFor="let material of booking.materials">
+              {{ material.name }}
+            </li>
+          </ul>
+        </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let booking">
+          <button mat-icon-button color="primary" (click)="editBooking(booking)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteBooking(booking.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Header and Row Definitions -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+  </div>
+</div>

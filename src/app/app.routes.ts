@@ -16,6 +16,7 @@ import {ClientOptionsComponent} from "./clients/client-options/client-options.co
 import {AdminComplaintsComponent} from "./administration/admin-complaints/admin-complaints.component";
 import {HomeOptionsComponent} from "./home/home-options/home-options.component";
 import {AdminNoticesComponent} from "./administration/admin-notices/admin-notices.component";
+import {MyBookingsComponent} from "./clients/my-bookings/my-bookings.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -44,6 +45,7 @@ export const routes: Routes = [
     children: [
       {path: '', component: ClientOptionsComponent},
       {path: 'complaints', component: ComplaintsComponent},
-      {path: 'installations', component: InstallationsComponent}
+      {path: 'installations', component: InstallationsComponent},
+      {path: 'my-bookings', component: MyBookingsComponent}
     ] }
 ];
