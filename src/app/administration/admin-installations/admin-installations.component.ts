@@ -77,8 +77,8 @@ export class AdminInstallationsComponent implements OnInit {
   }
 
   deleteInstallation(id: string): void {
-    /*this.installationService.deleteInstallation(id).subscribe(() => {
+    this.installationService.deleteInstallation(id).subscribe(() => {
       this.loadInstallations();
-    });*/
+    });
   }
 }

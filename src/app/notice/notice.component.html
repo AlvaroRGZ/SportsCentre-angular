@@ -1,12 +1,13 @@
 <hr>
-<div *ngIf="notices.length > 0; else noNotices">
-  <ul>
-    <li *ngFor="let notice of notices">
-      <h4>{{ notice.title }}</h4>
-      <h4>{{ notice.id }}</h4>
-      <h5>{{ notice.body }}</h5>
-    </li>
-  </ul>
+<div class="col-md-3" style="width: 12rem">
+  <div *ngIf="notices.length > 0; else noNotices">
+    <ul>
+      <li *ngFor="let notice of notices">
+        <h4>{{ notice.title }}</h4>
+        <h5>{{ notice.body }}</h5>
+      </li>
+    </ul>
+  </div>
 </div>
 <ng-template #noNotices>
   <p>No notices available.</p>

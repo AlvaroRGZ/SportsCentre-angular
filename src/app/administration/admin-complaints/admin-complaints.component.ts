@@ -53,10 +53,6 @@ export class AdminComplaintsComponent implements OnInit {
     });
   }
 
-  editComplaint(complaint: Complaint): void {
-    // Implement edit functionality here
-  }
-
   deleteComplaint(userId: string, complaintId: string): void {
     this.userService.deleteComplaint(userId, complaintId).subscribe(() => {
       this.complaintsByUser[userId] = this.complaintsByUser[userId].filter(complaint => complaint.id !== complaintId);

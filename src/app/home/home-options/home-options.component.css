@@ -1,32 +1,39 @@
 .container {
   display: flex;
+  padding: 1rem;
 }
 
-.col-md-4 {
-  flex: 1;
+.mainButtonsContainer {
+  padding: 1rem;
 }
 
-.col-md-8 {
-  flex: 2;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.col-md-8 .col-md-6 {
-  width: 50%;
-  padding: 10px;
-}
-.container {
-  max-width: 1200px;
-}
-
-.card {
-  height: 200px;
+.mainButton {
+  height: 12rem;
+  width: 30rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 5rem;
+  font-size: 4rem;
+  color: aliceblue;
+  border-radius: 1rem;
 }
 
-.card-title {
-  font-size: 1.5rem;
+.mainButton:hover {
+  color: cadetblue;
 }
+
+.installations {
+  background-image: url("../assets/installations.webp");
+}
+
+.sportClasses {
+  background-image: url("../assets/sports.png");
+}
+
+.noticesColumn {
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: powderblue;
+}
+
