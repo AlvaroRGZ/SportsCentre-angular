@@ -18,6 +18,8 @@ import {HomeOptionsComponent} from "./home/home-options/home-options.component";
 import {AdminNoticesComponent} from "./administration/admin-notices/admin-notices.component";
 import {MyBookingsComponent} from "./clients/my-bookings/my-bookings.component";
 import {AdminSportclassesComponent} from "./administration/admin-sportclasses/admin-sportclasses.component";
+import {SportClassesComponent} from "./clients/sport-classes/sport-classes.component";
+import {SportClassDetailsComponent} from "./clients/sport-classes/sport-class-details/sport-class-details.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -48,6 +50,8 @@ export const routes: Routes = [
       {path: '', component: ClientOptionsComponent},
       {path: 'complaints', component: ComplaintsComponent},
       {path: 'installations', component: InstallationsComponent},
-      {path: 'my-bookings', component: MyBookingsComponent}
+      {path: 'sport-classes', component: SportClassesComponent},
+      {path: 'sport-classes/:id', component: SportClassDetailsComponent},
+      {path: 'my-bookings', component: MyBookingsComponent},
     ] }
 ];

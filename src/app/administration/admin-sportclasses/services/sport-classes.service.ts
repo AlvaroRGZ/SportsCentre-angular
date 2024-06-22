@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {SportClass} from "./SportClass.model";
 import {SportClassCreation} from "./sportclassCreation.model";
@@ -16,12 +16,26 @@ export class SportClassesService {
     return this.http.get<SportClass[]>(this.baseUrl);
   }
 
+  getSportClassById(id: string) {
+    return this.http.get<SportClass>(`${this.baseUrl}/${id}`);
+  }
+
   createSportClass(sportClass: SportClassCreation): Observable<SportClass> {
     return this.http.post<SportClass>(this.baseUrl, sportClass);
   }
 
   updateSportClass(id: string, sportClass: SportClass) {
     return this.http.put<SportClass>(`${this.baseUrl}/${id}`, sportClass);
+  }
+
+  applyForClass(id: string, email: string) {
+    const params = new HttpParams().set('email', email);
+    return this.http.put<SportClass>(`${this.baseUrl}/${id}/addAssistant`, null, { params: params });
+  }
+
+  removeFromClass(id: string, email: string) {
+    const params = new HttpParams().set('email', email);
+    return this.http.put<SportClass>(`${this.baseUrl}/${id}/removeAssistant`, null, { params: params });
   }
 
   deleteSportClass(id: string) {

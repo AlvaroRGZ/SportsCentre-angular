@@ -1,0 +1,22 @@
+<div *ngIf="sportClass">
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">{{ sportClass.title }}</h3>
+        <p class="card-text"><strong>Installation Name:</strong> {{ sportClass.installation.name }}</p>
+        <p class="card-text"><strong>Installation Description:</strong> {{ sportClass.installation.description }}</p>
+        <div class="green-box" style="background-color: green; height: 50px; margin: 20px 0;"></div>
+        <p class="card-text"><strong>Total Places:</strong> {{ sportClass.places }}</p>
+        <p class="card-text"><strong>Assistants:</strong></p>
+        <ul>
+          <li *ngFor="let assistant of sportClass.assistants">
+            {{ assistant.name }} - {{ assistant.email }}
+          </li>
+        </ul>
+        <button class="btn btn-primary" (click)="toggleClassParticipation()">
+          {{ isCurrentUserInClass() ? 'Leave Class' : 'Join Class' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
