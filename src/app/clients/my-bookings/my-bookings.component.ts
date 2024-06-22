@@ -70,8 +70,10 @@ export class MyBookingsComponent implements OnInit {
     });
   }
 
-  editBooking(booking: Booking): void {
-    // Implement edit functionality here
+  editBooking(bookingid: string): void {
+    this.bookingService.updateBookingMaterials(bookingid, []).subscribe( (booking) => {
+      console.log("I updated")
+    });
   }
 
   deleteBooking(id: string): void {

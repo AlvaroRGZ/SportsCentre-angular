@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Booking} from "./booking.model";
+import {Material} from "../../../../materials/material.model";
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,11 @@ export class BookingsService {
 
   createBooking(booking: Booking): Observable<Booking> {
     return this.http.post<Booking>(this.baseUrl, booking);
+  }
+
+  updateBookingMaterials(id: string, materials: Material[]): Observable<Booking> {
+    console.log("LLAMO")
+    return this.http.put<Booking>(`${this.baseUrl}/${id}/materials`, materials);
   }
 
   deleteBooking(id: string): Observable<void> {
