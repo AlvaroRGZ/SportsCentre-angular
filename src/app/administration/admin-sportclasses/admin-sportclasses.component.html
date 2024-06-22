@@ -1,0 +1,45 @@
+<div class="admin-sportclasses-container">
+  <h2>Sport Classes</h2>
+  <button mat-raised-button color="primary" (click)="openDialog()">Add Sport Class</button>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef> Title </th>
+      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+
+    <!-- Installation Column -->
+    <ng-container matColumnDef="installation">
+      <th mat-header-cell *matHeaderCellDef> Installation </th>
+      <td mat-cell *matCellDef="let element"> {{element.installation.name}} </td>
+    </ng-container>
+
+    <!-- Places Column -->
+    <ng-container matColumnDef="places">
+      <th mat-header-cell *matHeaderCellDef> Places </th>
+      <td mat-cell *matCellDef="let element"> {{element.places}} </td>
+    </ng-container>
+
+    <!-- Assistants Column -->
+    <ng-container matColumnDef="assistants">
+      <th mat-header-cell *matHeaderCellDef> Assistants </th>
+      <td mat-cell *matCellDef="let element"> {{element.assistants.length}} </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary" (click)="editSportClass(element)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteSportClass(element.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

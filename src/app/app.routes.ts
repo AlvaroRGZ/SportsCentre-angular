@@ -17,6 +17,7 @@ import {AdminComplaintsComponent} from "./administration/admin-complaints/admin-
 import {HomeOptionsComponent} from "./home/home-options/home-options.component";
 import {AdminNoticesComponent} from "./administration/admin-notices/admin-notices.component";
 import {MyBookingsComponent} from "./clients/my-bookings/my-bookings.component";
+import {AdminSportclassesComponent} from "./administration/admin-sportclasses/admin-sportclasses.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -32,7 +33,8 @@ export const routes: Routes = [
       {path: 'materials', component: AdminMaterialsComponent},
       {path: 'notices', component: AdminNoticesComponent},
       {path: 'complaints', component: AdminComplaintsComponent},
-      {path: 'bookings', component: AdminBookingsComponent}
+      {path: 'bookings', component: AdminBookingsComponent},
+      {path: 'sport-classes', component: AdminSportclassesComponent}
     ]
   },
   { path: 'home', component: HomeComponent,
