@@ -20,6 +20,7 @@ import {MyBookingsComponent} from "./clients/my-bookings/my-bookings.component";
 import {AdminSportclassesComponent} from "./administration/admin-sportclasses/admin-sportclasses.component";
 import {SportClassesComponent} from "./clients/sport-classes/sport-classes.component";
 import {SportClassDetailsComponent} from "./clients/sport-classes/sport-class-details/sport-class-details.component";
+import {MySportClassesComponent} from "./clients/my-sport-classes/my-sport-classes.component";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -52,6 +53,7 @@ export const routes: Routes = [
       {path: 'installations', component: InstallationsComponent},
       {path: 'sport-classes', component: SportClassesComponent},
       {path: 'sport-classes/:id', component: SportClassDetailsComponent},
+      {path: 'my-classes', component: MySportClassesComponent},
       {path: 'my-bookings', component: MyBookingsComponent},
     ] }
 ];

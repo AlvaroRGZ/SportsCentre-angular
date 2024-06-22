@@ -20,6 +20,10 @@ export class SportClassesService {
     return this.http.get<SportClass>(`${this.baseUrl}/${id}`);
   }
 
+  getUserSportClasses(email: string) {
+    return this.http.get<SportClass[]>(`${this.baseUrl}/user/${email}`);
+  }
+
   createSportClass(sportClass: SportClassCreation): Observable<SportClass> {
     return this.http.post<SportClass>(this.baseUrl, sportClass);
   }

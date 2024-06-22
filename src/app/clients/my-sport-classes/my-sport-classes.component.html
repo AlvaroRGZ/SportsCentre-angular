@@ -1,0 +1,35 @@
+<!-- my-sport-classes.component.html -->
+<div *ngIf="sportClasses.length > 0; else noClasses">
+  <table mat-table [dataSource]="sportClasses" class="mat-elevation-z8">
+
+    <!-- Class Title Column -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef> Title </th>
+      <td mat-cell *matCellDef="let sportClass"> {{ sportClass.title }} </td>
+    </ng-container>
+
+    <!-- Class Title Column -->
+    <ng-container matColumnDef="installation">
+      <th mat-header-cell *matHeaderCellDef> Installation </th>
+      <td mat-cell *matCellDef="let sportClass"> {{ sportClass.installation.name }} </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let sportClass">
+        <button mat-icon-button color="warn" (click)="leaveClass(sportClass.id)">
+          <mat-icon>exit_to_app</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Header and Row Definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<ng-template #noClasses>
+  <p>You are not enrolled in any sport classes.</p>
+</ng-template>
