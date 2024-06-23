@@ -55,8 +55,6 @@ export class ComplaintsComponent implements OnInit {
       this.userService.getUserComplaints(this.userEmail)
         .subscribe(
           (complaints: Complaint[]) => {
-            console.log("RECIBI COMPLAINTS DE " + this.userEmail)
-            console.log(this.complaints)
             this.complaints = complaints;
           },
           (error) => {
@@ -66,7 +64,6 @@ export class ComplaintsComponent implements OnInit {
         );
     } else {
       console.error('User email is null.');
-      // Handle scenario where userEmail is null
     }
   }
 
@@ -85,7 +82,7 @@ export class ComplaintsComponent implements OnInit {
 
   addComplaint(title: string, body: string): void {
     const newComplaint: Complaint = {
-      id: '', // Server will generate the ID
+      id: '',
       title,
       body,
       datetime: new Date()

@@ -43,8 +43,10 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent,
     children: [
       {path: '', component: HomeOptionsComponent},
-      { path: 'installations', component: InstallationsComponent },
-      { path: 'installations/:id', component: InstallationComponent },
+      {path: 'installations', component: InstallationsComponent },
+      {path: 'installations/:id', component: InstallationComponent },
+      {path: 'sport-classes', component: SportClassesComponent},
+      {path: 'sport-classes/:id', component: SportClassDetailsComponent},
     ]
   },
   { path: 'clients', component: ClientsComponent, canActivateChild: [UsersCantActivate],
@@ -53,9 +55,9 @@ export const routes: Routes = [
       {path: 'complaints', component: ComplaintsComponent},
       {path: 'installations', component: InstallationsComponent},
       {path: 'installations/:id', component: InstallationComponent},
+      {path: 'my-bookings', component: MyBookingsComponent},
       {path: 'sport-classes', component: SportClassesComponent},
       {path: 'sport-classes/:id', component: SportClassDetailsComponent},
       {path: 'my-classes', component: MySportClassesComponent},
-      {path: 'my-bookings', component: MyBookingsComponent},
     ] }
 ];

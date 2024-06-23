@@ -8,7 +8,7 @@
           <p class="card-text"><strong>Installation:</strong> {{ sportClass.installation.name }}</p>
           <p class="card-text"><strong>Places available:</strong> {{ sportClass.places }}</p>
           <p class="card-text"><strong>Assistants:</strong> {{ sportClass.assistants.length }} / {{ sportClass.places }}</p>
-          <button class="btn btn-primary" [routerLink]="['/clients/sport-classes', sportClass.id]">View Details</button>
+          <button class="btn btn-primary" [routerLink]="[sportClass.id]">View Details</button>
         </div>
       </div>
     </div>

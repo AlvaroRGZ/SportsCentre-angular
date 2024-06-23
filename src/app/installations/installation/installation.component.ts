@@ -70,6 +70,9 @@ export class InstallationComponent implements OnInit {
 
   toggleBookingForm(): void {
     this.showBookingForm = !this.showBookingForm;
+    if (!this.showBookingForm && this.userEmail == '') {
+      this.router.navigate(['home']);
+    }
   }
 
   getBookingFormIndex(): number {

@@ -86,9 +86,6 @@ export class FirebaseAuthService {
         case 'admin':
           this.router.navigate(['/administration']);
           break;
-        case 'teacher':
-          this.router.navigate(['/clients']);
-          break;
         case 'client':
           this.router.navigate(['/clients']);
           break;

@@ -14,44 +14,18 @@ import {MatIcon} from "@angular/material/icon";
 export class AppComponent implements OnInit {
   title = 'SportCentre-angular';
   isLoggedIn: boolean = false;
-  isAdmin: boolean = false;
-  userRole: string = 'user';
   userName: string = '';
 
   constructor(private authService: FirebaseAuthService, private router: Router) {
     this.authService.getCurrentUser().subscribe((user) => {
-      this.userName = user?.email!;
-
       if (user) {
-        this.userName = user.email!;
-        switch (user.displayName) {
-          case 'admin':
-            this.isAdmin = true;
-            this.userRole = 'admin';
-            break;
-          case 'teacher':
-            this.isAdmin = true;
-            this.userRole = 'teacher';
-            break;
-          case 'client':
-            this.userRole = 'client';
-            break;
-          default:
-            this.userRole = 'user';
-            break;
-        }
+        this.userName = user?.email!;
         this.isLoggedIn = true;
-      } else {
-        this.userRole = 'user';
       }
     });
   }
 
   ngOnInit(): void {}
-
-  login(): void {
-    // Implement login logic
-  }
 
   logout(): void {
     this.authService.logout().then(() => {
@@ -62,14 +36,6 @@ export class AppComponent implements OnInit {
   }
 
   navigateHome(): void {
-    if (this.isLoggedIn) {
-      if (this.userRole === 'admin') {
-        this.router.navigate(['/administration']);
-      } else if (this.userRole === 'client') {
-        this.router.navigate(['/clients']);
-      }
-    } else {
-      this.router.navigate(['/home']);
-    }
+    this.authService.navigateHomeGivenUserRole();
   }
 }
