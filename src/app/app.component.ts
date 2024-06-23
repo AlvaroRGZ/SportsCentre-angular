@@ -20,7 +20,8 @@ export class AppComponent implements OnInit {
 
   constructor(private authService: FirebaseAuthService, private router: Router) {
     this.authService.getCurrentUser().subscribe((user) => {
-      console.log()
+      this.userName = user?.email!;
+
       if (user) {
         this.userName = user.email!;
         switch (user.displayName) {

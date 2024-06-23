@@ -1,6 +1,5 @@
 import {
   ActivatedRouteSnapshot,
-  CanActivateChildFn,
   CanActivateFn,
   Router,
   RouterStateSnapshot,
@@ -10,24 +9,22 @@ import { inject } from "@angular/core";
 import { catchError, map, Observable, of } from "rxjs";
 import { FirebaseAuthService } from "../firebase-auth.service";
 
-export const OnlyAdminsCanActivate: CanActivateFn = (
+export const UsersCantActivate: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot
 ): Observable<boolean | UrlTree> => {
   const authService = inject(FirebaseAuthService);
   const router = inject(Router);
-  console.log("MIRANDO")
+
   return authService.getCurrentRole().pipe(
     map(role => {
       switch (role) {
-        case "admin":
-          return true; // the user can access
         case "client":
-          console.log("clienteeeee")
-          return router.createUrlTree(['/clients']);
+          return true; // the user can access as a client
+        case "admin":
+          return router.createUrlTree(['/administration']); // Redirect admins to the admin area
         default:
-          console.log("ROLE " + role)
-          return router.createUrlTree(['/home']);
+          return router.createUrlTree(['/home']); // Redirect all others to the home page
       }
     }),
     catchError(() => {
@@ -36,5 +33,3 @@ export const OnlyAdminsCanActivate: CanActivateFn = (
     })
   );
 };
-
-export const canActivateChild: CanActivateChildFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => OnlyAdminsCanActivate(route, state);

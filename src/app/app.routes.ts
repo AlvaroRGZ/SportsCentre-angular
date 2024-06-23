@@ -1,4 +1,3 @@
-import { Routes } from '@angular/router';
 import {NoticeComponent} from "./notice/notice.component";
 import {SignupComponent} from "./signup/signup.component";
 import {LoginComponent} from "./login/login.component";
@@ -21,15 +20,16 @@ import {AdminSportclassesComponent} from "./administration/admin-sportclasses/ad
 import {SportClassesComponent} from "./clients/sport-classes/sport-classes.component";
 import {SportClassDetailsComponent} from "./clients/sport-classes/sport-class-details/sport-class-details.component";
 import {MySportClassesComponent} from "./clients/my-sport-classes/my-sport-classes.component";
+import {OnlyAdminsCanActivate} from "./authentication/guards/AdminGuard";
+import {Routes} from "@angular/router";
+import {UsersCantActivate} from "./authentication/guards/ClientsGuard";
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'notices', component: NoticeComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'installations', component: InstallationsComponent },
-  { path: 'installations/:id', component: InstallationComponent },
-  { path: 'administration', component: AdministrationComponent,
+  { path: 'administration', component: AdministrationComponent, canActivateChild: [OnlyAdminsCanActivate],
     children: [
       {path: '', component: AdminOptionsComponent},
       {path: 'installations', component: AdminInstallationsComponent},
@@ -44,13 +44,15 @@ export const routes: Routes = [
     children: [
       {path: '', component: HomeOptionsComponent},
       { path: 'installations', component: InstallationsComponent },
+      { path: 'installations/:id', component: InstallationComponent },
     ]
   },
-  { path: 'clients', component: ClientsComponent,
+  { path: 'clients', component: ClientsComponent, canActivateChild: [UsersCantActivate],
     children: [
       {path: '', component: ClientOptionsComponent},
       {path: 'complaints', component: ComplaintsComponent},
       {path: 'installations', component: InstallationsComponent},
+      {path: 'installations/:id', component: InstallationComponent},
       {path: 'sport-classes', component: SportClassesComponent},
       {path: 'sport-classes/:id', component: SportClassDetailsComponent},
       {path: 'my-classes', component: MySportClassesComponent},
