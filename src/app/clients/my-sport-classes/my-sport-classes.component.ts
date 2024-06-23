@@ -54,7 +54,6 @@ export class MySportClassesComponent implements OnInit {
     this.authService.getCurrentUser().subscribe(user => {
       this.currentUserEmail = user?.email!;
       this.sportClassesService.getUserSportClasses(user?.email!).subscribe(classes => {
-        // Assuming the service returns classes grouped by location or similar
         this.sportClasses = classes;
       }, error => {
         console.error('Error fetching sport classes:', error);
