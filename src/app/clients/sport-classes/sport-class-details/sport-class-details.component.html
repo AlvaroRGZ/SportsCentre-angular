@@ -13,9 +13,16 @@
             {{ assistant.name }} - {{ assistant.email }}
           </li>
         </ul>
-        <button class="btn btn-primary" (click)="toggleClassParticipation()">
-          {{ isCurrentUserInClass() ? 'Leave Class' : 'Join Class' }}
-        </button>
+        <div *ngIf="currentUserEmail != ''; else notLoggedIn">
+          <button class="btn btn-primary" (click)="toggleClassParticipation()">
+            {{ isCurrentUserInClass() ? 'Leave Class' : 'Join Class' }}
+          </button>
+        </div>
+        <ng-template #notLoggedIn>
+          <button class="btn btn-primary" [routerLink]="['/login']">
+            Log in to apply for a class
+          </button>
+        </ng-template>
       </div>
     </div>
   </div>

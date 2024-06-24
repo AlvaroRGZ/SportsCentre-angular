@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SportClass} from "../../../administration/admin-sportclasses/services/SportClass.model";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {SportClassesService} from "../../../administration/admin-sportclasses/services/sport-classes.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {FirebaseAuthService} from "../../../authentication/firebase-auth.service";
@@ -10,7 +10,8 @@ import {FirebaseAuthService} from "../../../authentication/firebase-auth.service
   standalone: true,
   imports: [
     NgForOf,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './sport-class-details.component.html',
   styleUrl: './sport-class-details.component.css'
@@ -23,7 +24,8 @@ export class SportClassDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private sportClassService: SportClassesService,
-    private authService: FirebaseAuthService
+    private authService: FirebaseAuthService,
+    private router: Router
   ) {
     // this.sportClass = {} as SportClass;
     this.currentUserEmail = '';
@@ -47,10 +49,12 @@ export class SportClassDetailsComponent implements OnInit {
   }
 
   toggleClassParticipation() {
-    if (this.isCurrentUserInClass()) {
-      this.leaveClass();
-    } else {
-      this.joinClass();
+    if (this.currentUserEmail != '') {
+      if (this.isCurrentUserInClass()) {
+        this.leaveClass();
+      } else {
+        this.joinClass();
+      }
     }
   }
 

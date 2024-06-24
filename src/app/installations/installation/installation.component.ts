@@ -70,8 +70,8 @@ export class InstallationComponent implements OnInit {
 
   toggleBookingForm(): void {
     this.showBookingForm = !this.showBookingForm;
-    if (!this.showBookingForm && this.userEmail == '') {
-      this.router.navigate(['home']);
+    if (this.showBookingForm && (this.booking.booker == '' || this.booking.booker == 'NotRegisteredUser')) {
+      this.router.navigate(['login']);
     }
   }
 
