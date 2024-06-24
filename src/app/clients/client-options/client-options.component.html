@@ -1,28 +1,27 @@
 <div class="container">
-  <div class="row mt-3">
-    <div class="col-md-4">
-      <app-notice></app-notice>
-    </div>
-    <div class="col-md-8">
-      <div class="row">
-        <div class="col-md-6">
-          <button routerLink="installations" class="btn btn-info">Installations</button>
-        </div>
-        <div class="col-md-6">
-          <button routerLink="sport-classes" class="btn btn-success">Sport Classes</button>
-        </div>
+  <div class="col-md-4 noticesColumn">
+    <h3>Notices</h3>
+    <app-notice></app-notice>
+  </div>
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-6 mainButtonsContainer">
+        <button routerLink="installations" class="mainButton installations">Installations</button>
       </div>
-      <div class="row mt-3">
-        <div class="col-md-6">
-          <button routerLink="my-bookings" class="btn btn-warn">My bookings</button>
-        </div>
-        <div class="col-md-6">
-          <button routerLink="my-classes" class="btn btn-danger">My classes</button>
-        </div>
+      <div class="col-md-6 mainButtonsContainer">
+        <button routerLink="sport-classes" class="mainButton sportClasses">Sport Classes</button>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-6 mainButtonsContainer">
+        <button routerLink="my-bookings" class="mainButton sportClasses">My bookings</button>
+      </div>
+      <div class="col-md-6 mainButtonsContainer">
+        <button routerLink="my-classes" class="mainButton sportClasses">My classes</button>
       </div>
     </div>
   </div>
-  <div class="col-md-3">
-    <button routerLink="complaints" class="btn btn-warn">Make a complaint</button>
+  <div class="col-md-3 mainButtonsContainer">
+    <button routerLink="complaints" class="mainButton sportClasses">Make a complaint</button>
   </div>
 </div>

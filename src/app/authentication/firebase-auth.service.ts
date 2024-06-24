@@ -8,7 +8,7 @@ import {
   updateProfile,
   User
 } from '@angular/fire/auth';
-import {firstValueFrom, Observable, of, switchMap} from 'rxjs';
+import {firstValueFrom, Observable, of, switchMap, timer} from 'rxjs';
 import 'firebase/compat/auth';
 import {HttpClient} from "@angular/common/http";
 import {UserAccount} from "../signup/userAccount.model";
@@ -45,12 +45,24 @@ export class FirebaseAuthService {
 
   // Login with email and password
   login(email: string, password: string): Promise<any> {
-    return signInWithEmailAndPassword(this.afAuth, email, password);
+    return signInWithEmailAndPassword(this.afAuth, email, password).then((result) => {
+      this.startLogoutTimer();
+      return result;
+    });
+  }
+
+  private startLogoutTimer() {
+    const logoutTime = 150000;
+    timer(logoutTime).subscribe(() => {
+      this.logout();
+    });
   }
 
   // Logout the current user
   logout(): Promise<void> {
-    return signOut(this.afAuth);
+    return signOut(this.afAuth).then(r => {
+      this.navigateHomeGivenUserRole();
+    });
   }
 
   getCurrentUser(): Observable<User | null> {

@@ -25,7 +25,7 @@ import {Routes} from "@angular/router";
 import {UsersCantActivate} from "./authentication/guards/ClientsGuard";
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'notices', component: NoticeComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },

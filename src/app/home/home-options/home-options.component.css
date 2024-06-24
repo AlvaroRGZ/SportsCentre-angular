@@ -15,7 +15,7 @@
   align-items: center;
   padding: 5rem;
   font-size: 4rem;
-  color: aliceblue;
+  color: cadetblue;
   border-radius: 1rem;
 }
 
@@ -24,11 +24,11 @@
 }
 
 .installations {
-  background-image: url("../assets/installations.webp");
+  background-image: url("/app/assets/installations.webp");
 }
 
 .sportClasses {
-  background-image: url("../assets/sports.png");
+  background-image: url("/app/assets/sports.png");
 }
 
 .noticesColumn {

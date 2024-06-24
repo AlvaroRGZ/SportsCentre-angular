@@ -15,21 +15,19 @@ export const UsersCantActivate: CanActivateFn = (
 ): Observable<boolean | UrlTree> => {
   const authService = inject(FirebaseAuthService);
   const router = inject(Router);
-
   return authService.getCurrentRole().pipe(
     map(role => {
       switch (role) {
         case "client":
-          return true; // the user can access as a client
+          return true;
         case "admin":
-          return router.createUrlTree(['/administration']); // Redirect admins to the admin area
+          return router.createUrlTree(['/administration']);
         default:
-          return router.createUrlTree(['/home']); // Redirect all others to the home page
+          return router.createUrlTree(['/home']);
       }
     }),
     catchError(() => {
-      // In case of an error, navigate to a fallback page
-      return of(router.createUrlTree(['/route-to-fallback-page']));
+      return of(router.createUrlTree(['/home']));
     })
   );
 };

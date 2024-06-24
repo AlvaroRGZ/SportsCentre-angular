@@ -16,7 +16,10 @@ export class AppComponent implements OnInit {
   isLoggedIn: boolean = false;
   userName: string = '';
 
-  constructor(private authService: FirebaseAuthService, private router: Router) {
+  constructor(
+    private authService: FirebaseAuthService,
+    private router: Router
+  ) {
     this.authService.getCurrentUser().subscribe((user) => {
       if (user) {
         this.userName = user?.email!;
@@ -31,7 +34,7 @@ export class AppComponent implements OnInit {
     this.authService.logout().then(() => {
       this.isLoggedIn = false;
       this.userName = '';
-      this.router.navigate(['/home']);
+      this.navigateHome();
     });
   }
 

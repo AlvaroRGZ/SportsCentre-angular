@@ -16,23 +16,19 @@ export const OnlyAdminsCanActivate: CanActivateFn = (
 ): Observable<boolean | UrlTree> => {
   const authService = inject(FirebaseAuthService);
   const router = inject(Router);
-  console.log("MIRANDO")
   return authService.getCurrentRole().pipe(
     map(role => {
       switch (role) {
         case "admin":
-          return true; // the user can access
+          return true;
         case "client":
-          console.log("clienteeeee")
           return router.createUrlTree(['/clients']);
         default:
-          console.log("ROLE " + role)
           return router.createUrlTree(['/home']);
       }
     }),
     catchError(() => {
-      // In case of an error, navigate to a fallback page
-      return of(router.createUrlTree(['/route-to-fallback-page']));
+      return of(router.createUrlTree(['/home']));
     })
   );
 };
