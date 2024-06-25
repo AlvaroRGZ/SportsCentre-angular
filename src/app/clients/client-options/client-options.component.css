@@ -24,11 +24,11 @@
 }
 
 .installations {
-  background-image: url("/app/assets/installations.webp");
+  background-image: url("/src/assets/installations.webp");
 }
 
 .sportClasses {
-  background-image: url("/app/assets/sports.png");
+  background-image: url("/src/assets/sports.png");
 }
 
 .noticesColumn {

@@ -1,3 +1,4 @@
+<h2>My bookings</h2>
 <div *ngFor="let installation of installations">
   <div *ngIf="bookingsByInstallation[installation.id] && bookingsByInstallation[installation.id].length > 0">
     <h3>{{ installation.name }}</h3>

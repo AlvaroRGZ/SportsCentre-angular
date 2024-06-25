@@ -7,3 +7,7 @@ export const firebaseConfig = {
   appId: "1:751757951556:web:7c8dfb91aeab822bb9f211",
   measurementId: "G-L0MJ6Z6WF0"
 };
+
+export const APIConfig = {
+  API_URL: "http://localhost:8080/",
+}

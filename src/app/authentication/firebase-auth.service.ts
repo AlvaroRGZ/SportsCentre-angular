@@ -13,6 +13,7 @@ import 'firebase/compat/auth';
 import {HttpClient} from "@angular/common/http";
 import {UserAccount} from "../signup/userAccount.model";
 import {Router} from "@angular/router";
+import {APIConfig} from "../../environment/environment";
 
 
 @Injectable({
@@ -20,7 +21,7 @@ import {Router} from "@angular/router";
 })
 export class FirebaseAuthService {
 
-  private static BASE_URL: string = 'http://localhost:8080/users';
+  private static BASE_URL: string = APIConfig.API_URL + 'users';
   constructor(private afAuth: Auth, private http: HttpClient, private router: Router) { }
 
   // Register a new user with email and password

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SportClass} from "../../../administration/admin-sportclasses/services/SportClass.model";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {SportClassesService} from "../../../administration/admin-sportclasses/services/sport-classes.service";
-import {NgForOf, NgIf} from "@angular/common";
+import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {FirebaseAuthService} from "../../../authentication/firebase-auth.service";
 
 @Component({
@@ -11,7 +11,8 @@ import {FirebaseAuthService} from "../../../authentication/firebase-auth.service
   imports: [
     NgForOf,
     NgIf,
-    RouterLink
+    RouterLink,
+    NgOptimizedImage
   ],
   templateUrl: './sport-class-details.component.html',
   styleUrl: './sport-class-details.component.css'

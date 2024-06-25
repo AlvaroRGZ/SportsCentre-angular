@@ -1,23 +1,20 @@
-select {
-  margin: 10px 0;
+.materials-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+.materials-select {
+  flex: 1;
+  margin-right: 20px; /* Espacio entre el select y la lista */
 }
 
-li {
-  margin: 5px 0;
+.selected-materials {
+  flex: 2;
 }
 
-button {
-  margin-top: 10px;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  opacity: 0.8;
+.selected-materials .buttons {
+  margin-top: 20px; /* Espacio entre la lista de materiales y los botones */
+  display: flex;
+  justify-content: space-between;
 }

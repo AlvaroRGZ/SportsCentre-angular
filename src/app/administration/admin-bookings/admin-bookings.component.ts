@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Installation } from "../../installations/installation.model";
 import { InstallationService } from "../../installations/installation.service";
-import { MatDialog } from "@angular/material/dialog";
 import { MatTableModule } from "@angular/material/table";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
